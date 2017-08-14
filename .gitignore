@@ -3,5 +3,6 @@
 coverage-html/
 vendor/
 
+composer.lock
 phpunit.xml
 
