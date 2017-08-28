@@ -1,8 +1,8 @@
 <?php
+
 namespace Fwolf\Config;
 
 use ArrayAccess;
-use Fwolf\Config\Exception\KeyNotExist;
 
 /**
  * Config class
@@ -28,7 +28,6 @@ interface ConfigInterface extends ArrayAccess
      *
      * @param   string $key
      * @return  mixed
-     * @throws  KeyNotExist
      */
     public function get($key);
 
@@ -38,7 +37,7 @@ interface ConfigInterface extends ArrayAccess
      *
      * @return  array
      */
-    public function getAll();
+    public function getRaw();
 
 
     /**
@@ -54,10 +53,10 @@ interface ConfigInterface extends ArrayAccess
      * Set single config value
      *
      * @param   string $key
-     * @param   mixed  $val
+     * @param   mixed  $value
      * @return  $this
      */
-    public function set($key, $val);
+    public function set($key, $value);
 
 
     /**
