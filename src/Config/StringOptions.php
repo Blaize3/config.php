@@ -130,9 +130,30 @@ class StringOptions extends Config
      * @param   string $optionSeparator
      * @param   string $kvSeparator
      * @return  $this
-     * @throws  InvalidFormatException
      */
     public function import(
+        $optionString = '',
+        $optionSeparator = null,
+        $kvSeparator = null
+    ) {
+        $this->configs = [];
+
+        $this->setStringOptions($optionString, $optionSeparator, $kvSeparator);
+
+        return $this;
+    }
+
+
+    /**
+     * Set config/options by a string
+     *
+     * @param   string $optionString
+     * @param   string $optionSeparator
+     * @param   string $kvSeparator
+     * @return  $this
+     * @throws  InvalidFormatException
+     */
+    public function setStringOptions(
         $optionString = '',
         $optionSeparator = null,
         $kvSeparator = null
@@ -144,8 +165,6 @@ class StringOptions extends Config
         if (is_null($kvSeparator)) {
             $kvSeparator = static::KV_SEPARATOR;
         }
-
-        $this->configs = [];
 
         $sections = explode($optionSeparator, $optionString);
         foreach ($sections as $section) {
