@@ -18,6 +18,9 @@
         "php": ">=5.5.0",
         "fwolf/singleton": "^1.0"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^5.7"
+    },
     "autoload": {
         "psr-4": {
             "Fwolf\\Config\\": "src/Config/"
