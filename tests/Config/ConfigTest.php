@@ -4,6 +4,7 @@ namespace FwolfTest\Config;
 
 use Fwolf\Config\Config;
 use Fwolf\Config\Exception\KeyNotExist;
+use Fwolf\Config\Exception\ReachLeafNode;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
 use PHPUnit_Framework_TestCase as PHPUnitTestCase;
 
@@ -165,5 +166,18 @@ class ConfigTest extends PHPUnitTestCase
             $expectedResult,
             var_export($config->getRaw(), true)
         );
+    }
+
+
+    public function testSetSingleThenMulti()
+    {
+        $this->expectException(ReachLeafNode::class);
+
+        $config = new Config();
+
+        $config->set('foo', 42);
+        $this->assertEquals(42, $config->get('foo'));
+
+        $config->set('foo.bar1', 421);
     }
 }

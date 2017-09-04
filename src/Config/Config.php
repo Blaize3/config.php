@@ -3,6 +3,7 @@
 namespace Fwolf\Config;
 
 use Fwolf\Config\Exception\KeyNotExist;
+use Fwolf\Config\Exception\ReachLeafNode;
 
 /**
  * Config class
@@ -209,6 +210,15 @@ class Config implements ConfigInterface
 
                 // Go down to next level
                 $configPointer = &$configPointer[$currentKey];
+
+                if (!is_array($configPointer)) {
+                    $scannedKeys = array_slice($sections, 0, $i + 1);
+                    $scannedKeyStr = implode(static::SEPARATOR, $scannedKeys);
+                    throw new ReachLeafNode(
+                        "Key '$scannedKeyStr' has assigned single value, " .
+                        "did not accept array/multiple value assign"
+                    );
+                }
             }
 
             // At last level, set the value
